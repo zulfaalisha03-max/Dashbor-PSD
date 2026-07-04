@@ -564,11 +564,67 @@ elif menu == "F. Insight & Rekomendasi":
 # ==========================================
 st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
 st.markdown("""
-<div class="footer-tropical">
-    <div style="font-size:35px;">🌿🌴🌺</div>
-    <h3 style="color:#e9c46a; margin:10px 0; font-family:'Playfair Display', serif;">Tropical Heritage Dashboard</h3>
-    <p style="margin:5px 0;">UAS Pengenalan Sains Data 2026</p>
-    <p style="margin:5px 0; font-size:13px;">Program Studi Sains Data - UIN K.H. Abdurrahman Wahid Pekalongan</p>
-    <p style="margin:10px 0 0 0; color:#f4a261; font-style:italic;">Menjaga Warisan Perkebunan Nusantara</p>
-</div>
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap');
+
+/* ... semua CSS yang sudah ada sebelumnya (Global, Sidebar, Hero, Cards, dll) ... */
+
+.stAlert { border-radius: 12px !important; border-left: 4px solid #e9c46a !important; }
+
+/* ========================================== */
+/* ✅ TEMPELKAN KODE PERBAIKAN DI SINI        */
+/* (Tepat sebelum penutup tag </style>)       */
+/* ========================================== */
+
+/* Fix: Warna Teks Pencarian & Widget Agar Terbaca */
+[data-testid="stWidgetLabel"] {
+    color: #1a4d2e !important;
+    font-weight: 700 !important;
+}
+
+[data-testid="stSelectbox"] div[data-baseweb="select"] > div,
+[data-testid="stMultiSelect"] div[data-baseweb="select"] > div,
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input {
+    color: #1a4d2e !important;
+    background-color: #ffffff !important;
+    border: 2px solid #e9c46a !important;
+    border-radius: 10px !important;
+}
+
+[data-testid="stSelectbox"] input::placeholder,
+[data-testid="stMultiSelect"] input::placeholder,
+[data-testid="stTextInput"] input::placeholder {
+    color: #7a6f5f !important;
+    opacity: 1 !important;
+}
+
+div[data-baseweb="popover"] li {
+    color: #1a4d2e !important;
+    background-color: #ffffff !important;
+}
+
+div[data-baseweb="popover"] li:hover,
+div[data-baseweb="popover"] li[aria-selected="true"] {
+    background-color: #e9c46a !important;
+    color: #1a4d2e !important;
+}
+
+[data-testid="stMultiSelect"] span[data-baseweb="tag"] {
+    background-color: #2a9d8f !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+}
+
+[data-testid="stSlider"] label,
+[data-testid="stSlider"] div[data-testid="stTickBar"] {
+    color: #1a4d2e !important;
+}
+
+[data-testid="stCaptionContainer"] {
+    color: #7a6f5f !important;
+}
+
+</style>
 """, unsafe_allow_html=True)

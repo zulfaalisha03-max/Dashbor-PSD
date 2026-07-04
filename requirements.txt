@@ -1,7 +1,7 @@
-streamlit
-pandas
-numpy
-matplotlib
-seaborn
-plotly
-scikit-learn
+your_project/
+├── app.py (atau nama file utama Anda)
+├── .streamlit/
+│   └── config.toml
+├── assets/
+│   └── style.css
+└── requirements.txt

@@ -447,6 +447,12 @@ def make_map(df_map, komoditas, warna='#1a4d2e'):
     df_map['lat'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0,0))[0])
     df_map['lon'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0,0))[1])
     df_map = df_map[df_map['lat'] != 0]
+    # Fungsi helper untuk peta
+def make_map(df_map, komoditas, warna='#1a4d2e'):
+    df_map = df_map.copy()
+    df_map['lat'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0,0))[0])
+    df_map['lon'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0,0))[1])
+    df_map = df_map[df_map['lat'] != 0]
     
     fig = px.scatter_geo(
         df_map,
@@ -466,28 +472,34 @@ def make_map(df_map, komoditas, warna='#1a4d2e'):
         projection='natural earth'
     )
     
+    # ✅ PERBAIKAN: Hapus 'landpattern' yang tidak didukung Plotly
     fig.update_geos(
         showcountries=True, countrycolor='#2a9d8f',
         showcoastlines=True, coastlinecolor='#1a4d2e',
         showland=True, landcolor='#f4e4bc',
         showocean=True, oceancolor='#a8d5e2',
-        showlakes=False,
-        landpattern='dots'
+        showlakes=False
     )
     
     fig.update_layout(
         height=600,
         margin=dict(l=0, r=0, t=40, b=0),
         paper_bgcolor='#f8f5f0',
-        geo_bgcolor='#a8d5e2',
+        # ✅ PERBAIKAN: Hapus 'geo_bgcolor' (sudah dihandle oleh oceancolor di atas)
         font=dict(family='Lato', color='#1a4d2e'),
         coloraxis_colorbar=dict(
-            title=f"Produksi<br>{komoditas}<br>(Ton)",
+            title=f"Produksi<br>{komoditas.replace('_',' ')}<br>(Ton)",
             thickness=15,
             len=0.7,
             bgcolor='white'
         ),
         title=dict(
+            text=f"🗺️ Peta Sebaran Produksi {komoditas.replace('_',' ')} di Indonesia",
+            font=dict(family='Playfair Display', size=22, color='#1a4d2e'),
+            x=0.5
+        )
+    )
+    return fig
             text=f"🗺️ Peta Sebaran Produksi {komoditas.replace('_',' ')} di Indonesia",
             font=dict(family='Playfair Display', size=22, color='#1a4d2e'),
             x=0.5

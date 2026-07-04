@@ -15,25 +15,16 @@ st.set_page_config(
 )
 
 # ============================================
-# CUSTOM CSS (INLINE - TERJAMIN TIDAK ERROR)
+# CUSTOM CSS (TANPA @IMPORT - AMAN)
 # ============================================
 st.markdown("""
 <style>
-/* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
-
 /* Global Styling */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Main Container */
 .main .block-container {
     padding: 2rem 3rem !important;
     max-width: 1400px !important;
-    background: #0A0E17;
 }
 
 /* Hero Header */
@@ -46,48 +37,16 @@ st.markdown("""
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.hero-header::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(27, 94, 32, 0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: pulse 8s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .hero-title {
-    font-family: 'Playfair Display', serif !important;
-    font-size: 3.5rem !important;
+    font-size: 3rem !important;
     font-weight: 900 !important;
     background: linear-gradient(135deg, #4CAF50, #81C784, #A5D6A7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem !important;
-    position: relative;
-    z-index: 1;
     letter-spacing: -1px;
 }
 
@@ -95,56 +54,36 @@ st.markdown("""
     font-size: 1.2rem !important;
     color: #9CA3AF !important;
     font-weight: 300 !important;
-    position: relative;
-    z-index: 1;
     letter-spacing: 0.5px;
 }
 
-/* Premium Metric Cards */
+/* Metric Cards */
 .metric-card {
     background: linear-gradient(145deg, rgba(18, 24, 38, 0.9), rgba(26, 35, 50, 0.8));
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     padding: 1.8rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    animation: fadeInUp 0.6s ease-out;
 }
 
 .metric-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     height: 3px;
     background: linear-gradient(90deg, #4CAF50, #81C784, #4CAF50);
-    background-size: 200% 100%;
-    animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
 }
 
 .metric-card:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-5px);
     border-color: rgba(76, 175, 80, 0.3);
     box-shadow: 0 20px 60px rgba(76, 175, 80, 0.15);
 }
 
-.metric-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    display: block;
-    filter: drop-shadow(0 4px 8px rgba(76, 175, 80, 0.3));
-}
-
+.metric-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
 .metric-label {
     font-size: 0.85rem !important;
     color: #9CA3AF !important;
@@ -153,15 +92,12 @@ st.markdown("""
     font-weight: 600;
     margin-bottom: 0.5rem !important;
 }
-
 .metric-value {
-    font-size: 2.2rem !important;
+    font-size: 2rem !important;
     font-weight: 800 !important;
     color: #E8EAF0 !important;
     line-height: 1.2 !important;
-    margin-bottom: 0.3rem !important;
 }
-
 .metric-delta {
     font-size: 0.9rem !important;
     color: #4CAF50 !important;
@@ -174,51 +110,36 @@ st.markdown("""
     padding-bottom: 1rem;
     border-bottom: 2px solid rgba(76, 175, 80, 0.2);
     position: relative;
-    animation: fadeInUp 0.6s ease-out;
 }
 
 .section-header::after {
     content: '';
     position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100px;
-    height: 2px;
+    bottom: -2px; left: 0;
+    width: 100px; height: 2px;
     background: linear-gradient(90deg, #4CAF50, transparent);
 }
 
 .section-title {
-    font-family: 'Playfair Display', serif !important;
-    font-size: 2.2rem !important;
+    font-size: 2rem !important;
     font-weight: 800 !important;
     color: #E8EAF0 !important;
     margin-bottom: 0.5rem !important;
-    letter-spacing: -0.5px;
 }
 
 .section-subtitle {
     font-size: 1rem !important;
     color: #6B7280 !important;
-    font-weight: 400 !important;
 }
 
-/* Chart Containers */
+/* Chart Container */
 .chart-container {
     background: linear-gradient(145deg, rgba(18, 24, 38, 0.95), rgba(26, 35, 50, 0.9));
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     padding: 2rem;
     margin: 1.5rem 0;
-    transition: all 0.3s ease;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.chart-container:hover {
-    border-color: rgba(76, 175, 80, 0.2);
-    box-shadow: 0 12px 40px rgba(76, 175, 80, 0.1);
 }
 
 .chart-title {
@@ -226,17 +147,8 @@ st.markdown("""
     font-weight: 700 !important;
     color: #E8EAF0 !important;
     margin-bottom: 1.5rem !important;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.chart-title::before {
-    content: '';
-    width: 4px;
-    height: 24px;
-    background: linear-gradient(180deg, #4CAF50, #81C784);
-    border-radius: 2px;
+    padding-left: 1rem;
+    border-left: 4px solid #4CAF50;
 }
 
 /* Map Container */
@@ -247,21 +159,6 @@ st.markdown("""
     padding: 2rem;
     margin: 2rem 0;
     box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-    animation: fadeInUp 0.6s ease-out;
-}
-
-.map-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #1B5E20, #4CAF50, #81C784, #4CAF50, #1B5E20);
-    background-size: 200% 100%;
-    animation: shimmer 4s linear infinite;
 }
 
 /* Insight Box */
@@ -272,8 +169,6 @@ st.markdown("""
     border-radius: 12px;
     padding: 1.5rem;
     margin: 1.5rem 0;
-    position: relative;
-    animation: fadeInUp 0.6s ease-out;
 }
 
 .insight-title {
@@ -283,11 +178,9 @@ st.markdown("""
     font-size: 1.1rem !important;
 }
 
-/* Sidebar Styling */
+/* Sidebar */
 section[data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0D1117 0%, #161B22 100%) !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar-brand {
@@ -298,7 +191,6 @@ section[data-testid="stSidebar"] {
 }
 
 .sidebar-brand h1 {
-    font-family: 'Playfair Display', serif !important;
     font-size: 1.8rem !important;
     background: linear-gradient(135deg, #4CAF50, #81C784);
     -webkit-background-clip: text;
@@ -322,11 +214,9 @@ section[data-testid="stSidebar"] {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     color: #6B7280 !important;
     font-size: 0.9rem !important;
-    animation: fadeInUp 0.6s ease-out;
 }
 
 .footer-brand {
-    font-family: 'Playfair Display', serif !important;
     font-size: 1.5rem !important;
     background: linear-gradient(135deg, #4CAF50, #81C784);
     -webkit-background-clip: text;
@@ -343,62 +233,19 @@ section[data-testid="stSidebar"] {
     border: none;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(18, 24, 38, 0.5);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #1B5E20, #4CAF50);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #2E7D32, #81C784);
-}
-
 /* Responsive */
-@media (max-width: 1024px) {
-    .main .block-container {
-        padding: 1.5rem !important;
-    }
-    .hero-title {
-        font-size: 2.5rem !important;
-    }
-    .metric-value {
-        font-size: 1.8rem !important;
-    }
-}
-
 @media (max-width: 768px) {
-    .main .block-container {
-        padding: 1rem !important;
-    }
-    .hero-header {
-        padding: 2rem 1rem;
-    }
-    .hero-title {
-        font-size: 2rem !important;
-    }
-    .section-title {
-        font-size: 1.8rem !important;
-    }
-    .chart-container {
-        padding: 1.5rem;
-    }
+    .main .block-container { padding: 1rem !important; }
+    .hero-title { font-size: 2rem !important; }
+    .section-title { font-size: 1.5rem !important; }
+    .chart-container { padding: 1.5rem; }
 }
 </style>
 """, unsafe_allow_html=True)
 
 # ============================================
-# DATA DUMMY (GANTI DENGAN DATA ASLI ANDA)
+# DATA DUMMY
 # ============================================
-# Ganti bagian ini dengan loading data asli Anda
 map_data = pd.DataFrame({
     'provinsi': ['Riau', 'Kalimantan Tengah', 'Sumatera Utara', 'Kalimantan Barat', 
                  'Sumatera Selatan', 'Kalimantan Timur', 'Jambi', 'Sumatera Barat', 
@@ -414,10 +261,9 @@ komoditas_data = pd.DataFrame({
 })
 
 # ============================================
-# SIDEBAR NAVIGATION
+# SIDEBAR
 # ============================================
 with st.sidebar:
-    # Brand Header
     st.markdown("""
     <div class="sidebar-brand">
         <h1>🌴 Tropical Heritage</h1>
@@ -426,8 +272,6 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    
-    # Navigation Menu
     st.markdown("### 📍 NAVIGASI")
     
     menu_options = [
@@ -444,26 +288,15 @@ with st.sidebar:
         "💡 F. Insight & Rekomendasi"
     ]
     
-    selected_page = st.radio(
-        "Pilih Halaman",
-        options=menu_options,
-        label_visibility="collapsed"
-    )
+    # TANPA label_visibility (kompatibel semua versi)
+    selected_page = st.radio("Pilih Halaman", options=menu_options)
     
     st.markdown("---")
-    
-    # Commodity Filter
     st.markdown("### 🎯 FILTER KOMODITAS")
     komoditas_options = ['Kelapa_Sawit', 'Kelapa', 'Tebu', 'Karet', 'Kopi', 'Kakao', 'Teh']
-    selected_komoditas = st.selectbox(
-        "Pilih Komoditas",
-        options=komoditas_options,
-        index=0
-    )
+    selected_komoditas = st.selectbox("Pilih Komoditas", options=komoditas_options, index=0)
     
     st.markdown("---")
-    
-    # Footer Info
     st.markdown("""
     <div style="text-align: center; padding: 1rem; color: #6B7280; font-size: 0.8rem;">
         <div style="font-weight: 600; color: #4CAF50; margin-bottom: 0.5rem;">UAS SAINS DATA 2026</div>
@@ -475,7 +308,6 @@ with st.sidebar:
 # PAGE: BERANDA & PETA
 # ============================================
 if selected_page == "🏠 Beranda & Peta":
-    # Hero Header
     st.markdown("""
     <div class="hero-header">
         <h1 class="hero-title">Tropical Heritage Dashboard</h1>
@@ -483,7 +315,7 @@ if selected_page == "🏠 Beranda & Peta":
     </div>
     """, unsafe_allow_html=True)
     
-    # Premium Metric Cards
+    # Metric Cards
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
@@ -528,19 +360,18 @@ if selected_page == "🏠 Beranda & Peta":
     
     st.markdown('<hr class="premium-divider">', unsafe_allow_html=True)
     
-    # Map Section
+    # MAP SECTION - MENGGUNAKAN scatter_geo (TANPA MAPBOX TOKEN)
     st.markdown("""
     <div class="section-header">
         <h2 class="section-title">🗺️ PETA PERKEBUNAN INDONESIA</h2>
-        <div class="section-subtitle">Klik lingkaran untuk melihat detail produksi setiap provinsi</div>
+        <div class="section-subtitle">Sebaran produksi per provinsi di seluruh Indonesia</div>
     </div>
     """, unsafe_allow_html=True)
     
-    # Map Container
     st.markdown('<div class="map-container">', unsafe_allow_html=True)
     
-    # Create interactive map with Plotly
-    fig_map = px.scatter_mapbox(
+    # ✅ PAKAI scatter_geo - TIDAK BUTUH TOKEN MAPBOX
+    fig_map = px.scatter_geo(
         map_data,
         lat='lat',
         lon='lon',
@@ -548,49 +379,60 @@ if selected_page == "🏠 Beranda & Peta":
         color='produksi',
         hover_name='provinsi',
         hover_data={'produksi': True, 'lat': False, 'lon': False},
-        color_continuous_scale=px.colors.sequential.Viridis,
-        mapbox_style="carto-darkmatter",
+        color_continuous_scale='Viridis',
+        scope='asia',
         center={"lat": -2.5, "lon": 118.0},
-        zoom=4,
+        projection_type="mercator",
         size_max=40,
-        opacity=0.8,
-        title="Peta Sebaran Produksi Kelapa Sawit di Indonesia"
+        opacity=0.8
     )
     
     fig_map.update_layout(
-        margin={"r": 0, "t": 50, "l": 0, "b": 0},
+        margin={"r": 0, "t": 30, "l": 0, "b": 0},
         height=600,
+        geo=dict(
+            showland=True,
+            landcolor="rgb(30, 40, 50)",
+            countrycolor="rgb(60, 70, 80)",
+            showocean=True,
+            oceancolor="rgb(10, 14, 23)",
+            showlakes=True,
+            lakecolor="rgb(15, 20, 30)",
+            showsubunits=True,
+            subunitcolor="rgb(50, 60, 70)",
+            showframe=False,
+            showcoastlines=True,
+            coastlinecolor="rgb(70, 80, 90)",
+        ),
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         font=dict(color='#E8EAF0')
     )
     
     st.plotly_chart(fig_map, use_container_width=True)
-    
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Map Insight
+    # Insight
     st.markdown("""
     <div class="insight-box">
         <div class="insight-title">💡 Insight Peta</div>
-        <p>Lingkaran besar menunjukkan provinsi sentra produksi Kelapa Sawit. Terlihat jelas konsentrasi produksi di wilayah Sumatera (untuk kelapa sawit & karet) dan Jawa Timur (untuk tebu & kopi).</p>
+        <p>Lingkaran besar menunjukkan provinsi sentra produksi Kelapa Sawit. Terlihat jelas konsentrasi produksi di wilayah Sumatera dan Kalimantan.</p>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown('<hr class="premium-divider">', unsafe_allow_html=True)
     
     # Top 10 Provinces
-    st.markdown("""
+    st.markdown(f"""
     <div class="section-header">
         <h2 class="section-title">🏆 Top 10 Provinsi Sentra Produksi</h2>
-        <div class="section-subtitle">Peringkat provinsi dengan produksi {} tertinggi</div>
+        <div class="section-subtitle">Peringkat provinsi dengan produksi {selected_komoditas.replace('_', ' ')} tertinggi</div>
     </div>
-    """.format(selected_komoditas.replace('_', ' ')), unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        # Bar chart
         fig_bar = go.Figure(data=[
             go.Bar(
                 x=map_data['produksi'],
@@ -603,7 +445,7 @@ if selected_page == "🏠 Beranda & Peta":
                 ),
                 text=map_data['produksi'].apply(lambda x: f'{x:,.0f} Ton'),
                 textposition='auto',
-                textfont=dict(color='#E8EAF0', size=12)
+                textfont=dict(color='white', size=12)
             )
         ])
         
@@ -620,7 +462,6 @@ if selected_page == "🏠 Beranda & Peta":
         st.plotly_chart(fig_bar, use_container_width=True)
     
     with col2:
-        # Pie chart
         st.markdown("#### Komposisi Komoditas")
         
         fig_pie = go.Figure(data=[
@@ -630,7 +471,7 @@ if selected_page == "🏠 Beranda & Peta":
                 hole=0.4,
                 marker=dict(colors=['#4CAF50', '#81C784', '#A5D6A7', '#C8E6C9', '#E8F5E9', '#F1F8E9', '#DCEDC8']),
                 textinfo='percent',
-                textfont=dict(size=12, color='#E8EAF0'),
+                textfont=dict(size=12, color='white'),
                 hovertemplate='<b>%{label}</b><br>Persentase: %{percent}<extra></extra>'
             )
         ])
@@ -640,8 +481,7 @@ if selected_page == "🏠 Beranda & Peta":
             paper_bgcolor='rgba(0,0,0,0)',
             plot_bgcolor='rgba(0,0,0,0)',
             font=dict(color='#E8EAF0'),
-            showlegend=True,
-            legend=dict(font=dict(size=11))
+            showlegend=True
         )
         
         st.plotly_chart(fig_pie, use_container_width=True)
@@ -660,8 +500,6 @@ elif selected_page == "📊 A. Data Understanding":
     st.markdown("""
     <div class="chart-container">
         <div class="chart-title">📋 Informasi Dataset</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Halaman ini menampilkan informasi detail tentang dataset yang digunakan dalam analisis.</p>
-        <br>
         <p><strong style="color: #4CAF50;">Dataset:</strong> Produksi Perkebunan Indonesia</p>
         <p><strong style="color: #4CAF50;">Jumlah Provinsi:</strong> 38 Provinsi</p>
         <p><strong style="color: #4CAF50;">Komoditas:</strong> 7 Jenis (Kelapa Sawit, Kelapa, Tebu, Karet, Kopi, Kakao, Teh)</p>
@@ -683,8 +521,7 @@ elif selected_page == "🧹 B. Data Cleaning":
     st.markdown("""
     <div class="chart-container">
         <div class="chart-title">🔧 Data Cleaning Pipeline</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Proses pembersihan data meliputi:</p>
-        <ul style="color: #9CA3AF; margin-top: 1rem; margin-left: 2rem;">
+        <ul style="color: #9CA3AF; margin-left: 2rem;">
             <li>Handling missing values</li>
             <li>Outlier detection</li>
             <li>Data transformation</li>
@@ -694,7 +531,7 @@ elif selected_page == "🧹 B. Data Cleaning":
     """, unsafe_allow_html=True)
 
 # ============================================
-# PAGE: EDA
+# PAGE: EDA (TANPA st.tabs - AMAN)
 # ============================================
 elif selected_page == "📈 C. EDA (6 Visualisasi)":
     st.markdown("""
@@ -704,58 +541,19 @@ elif selected_page == "📈 C. EDA (6 Visualisasi)":
     </div>
     """, unsafe_allow_html=True)
     
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-        "📊 Visualisasi 1", "📊 Visualisasi 2", "📊 Visualisasi 3",
-        "📊 Visualisasi 4", "📊 Visualisasi 5", "📊 Visualisasi 6"
-    ])
+    # Gunakan selectbox sebagai pengganti tabs (lebih aman)
+    viz_option = st.selectbox(
+        "Pilih Visualisasi",
+        ["1. Distribusi Produksi", "2. Tren Tahunan", "3. Box Plot", 
+         "4. Histogram", "5. Scatter Plot", "6. Radar Chart"]
+    )
     
-    with tab1:
-        st.markdown("""
-        <div class="chart-container">
-            <div class="chart-title">Distribusi Produksi per Komoditas</div>
-            <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode visualisasi Anda di sini</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with tab2:
-        st.markdown("""
-        <div class="chart-container">
-            <div class="chart-title">Tren Produksi Tahunan</div>
-            <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode visualisasi Anda di sini</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with tab3:
-        st.markdown("""
-        <div class="chart-container">
-            <div class="chart-title">Visualisasi 3</div>
-            <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode visualisasi Anda di sini</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with tab4:
-        st.markdown("""
-        <div class="chart-container">
-            <div class="chart-title">Visualisasi 4</div>
-            <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode visualisasi Anda di sini</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with tab5:
-        st.markdown("""
-        <div class="chart-container">
-            <div class="chart-title">Visualisasi 5</div>
-            <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode visualisasi Anda di sini</p>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with tab6:
-        st.markdown("""
-        <div class="chart-container">
-            <div class="chart-title">Visualisasi 6</div>
-            <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode visualisasi Anda di sini</p>
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown(f"""
+    <div class="chart-container">
+        <div class="chart-title">📊 {viz_option}</div>
+        <p style="color: #9CA3AF;">Tambahkan kode visualisasi Anda di sini</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ============================================
 # PAGE: ANALISIS HUBUNGAN
@@ -771,7 +569,7 @@ elif selected_page == "🔗 D. Analisis Hubungan":
     st.markdown("""
     <div class="chart-container">
         <div class="chart-title">📊 Correlation Matrix</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode analisis korelasi Anda di sini</p>
+        <p style="color: #9CA3AF;">Tambahkan kode analisis korelasi Anda di sini</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -789,7 +587,7 @@ elif selected_page == "📉 E. Regresi Linear":
     st.markdown("""
     <div class="chart-container">
         <div class="chart-title">📈 Linear Regression Model</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode regresi linear Anda di sini</p>
+        <p style="color: #9CA3AF;">Tambahkan kode regresi linear Anda di sini</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -807,7 +605,7 @@ elif selected_page == "🌲 BONUS: Random Forest":
     st.markdown("""
     <div class="chart-container">
         <div class="chart-title">🌳 Random Forest Model</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode Random Forest Anda di sini</p>
+        <p style="color: #9CA3AF;">Tambahkan kode Random Forest Anda di sini</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -825,7 +623,7 @@ elif selected_page == "🌳 BONUS: Decision Tree":
     st.markdown("""
     <div class="chart-container">
         <div class="chart-title">🌲 Decision Tree Model</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode Decision Tree Anda di sini</p>
+        <p style="color: #9CA3AF;">Tambahkan kode Decision Tree Anda di sini</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -843,7 +641,7 @@ elif selected_page == "🔮 BONUS: Forecasting":
     st.markdown("""
     <div class="chart-container">
         <div class="chart-title">📊 Time Series Forecasting</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode forecasting Anda di sini</p>
+        <p style="color: #9CA3AF;">Tambahkan kode forecasting Anda di sini</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -861,12 +659,12 @@ elif selected_page == "⚖️ BONUS: Komparator":
     st.markdown("""
     <div class="chart-container">
         <div class="chart-title">📊 Model Comparison</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Tambahkan kode komparasi model Anda di sini</p>
+        <p style="color: #9CA3AF;">Tambahkan kode komparasi model Anda di sini</p>
     </div>
     """, unsafe_allow_html=True)
 
 # ============================================
-# PAGE: INSIGHT & REKOMENDASI
+# PAGE: INSIGHT
 # ============================================
 elif selected_page == "💡 F. Insight & Rekomendasi":
     st.markdown("""
@@ -879,14 +677,14 @@ elif selected_page == "💡 F. Insight & Rekomendasi":
     st.markdown("""
     <div class="insight-box">
         <div class="insight-title">🎯 Insight Utama</div>
-        <p style="color: #9CA3AF; margin-top: 1rem;">Berdasarkan analisis menyeluruh, kelapa sawit mendominasi produksi perkebunan Indonesia dengan kontribusi lebih dari 80%.</p>
+        <p>Kelapa sawit mendominasi produksi perkebunan Indonesia dengan kontribusi lebih dari 80%.</p>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("""
     <div class="insight-box">
         <div class="insight-title">💼 Rekomendasi Strategis</div>
-        <ol style="color: #9CA3AF; margin-top: 1rem; margin-left: 2rem;">
+        <ol style="color: #9CA3AF; margin-left: 2rem;">
             <li>Fokus pada optimalisasi produksi kelapa sawit di provinsi sentra</li>
             <li>Diversifikasi komoditas untuk mengurangi ketergantungan</li>
             <li>Pengembangan infrastruktur di wilayah potensial</li>

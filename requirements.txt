@@ -1,7 +1,4 @@
-your_project/
-├── app.py (atau nama file utama Anda)
-├── .streamlit/
-│   └── config.toml
-├── assets/
-│   └── style.css
-└── requirements.txt
+streamlit
+pandas
+numpy
+plotly

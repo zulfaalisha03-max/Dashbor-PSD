@@ -1,7 +1,8 @@
 """
 =============================================================================
-🌿 TROPICAL HERITAGE DASHBOARD - Indonesian Plantation Analytics
-UAS Pengenalan Sains Data - Tema Tropical dengan PETA INDONESIA
+TROPICAL HERITAGE DASHBOARD - Indonesian Plantation Analytics
+UAS Pengenalan Sains Data - UIN K.H. Abdurrahman Wahid Pekalongan
+Tema: Tropical dengan PETA INDONESIA INTERAKTIF
 =============================================================================
 """
 import streamlit as st
@@ -39,21 +40,17 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap');
 
 * { font-family: 'Lato', sans-serif; }
-
 h1, h2, h3, .brand-title { font-family: 'Playfair Display', serif !important; }
 
 .stApp {
     background: #f8f5f0;
-    background-image: 
+    background-image:
         radial-gradient(at 20% 30%, rgba(42, 157, 143, 0.08) 0px, transparent 50%),
         radial-gradient(at 80% 70%, rgba(233, 196, 106, 0.08) 0px, transparent 50%);
 }
 
 #MainMenu, footer, header { visibility: hidden; }
 
-/* ========================================== */
-/* SIDEBAR TROPICAL                           */
-/* ========================================== */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #1a4d2e 0%, #2d7a4a 100%);
     border-right: 3px solid #e9c46a;
@@ -93,7 +90,6 @@ h1, h2, h3, .brand-title { font-family: 'Playfair Display', serif !important; }
     opacity: 0.9;
 }
 
-/* RADIO - Tropical Leaves Style */
 div[role="radiogroup"] > label {
     background: rgba(248, 245, 240, 0.08);
     padding: 12px 16px !important;
@@ -120,9 +116,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     color: #1a4d2e !important;
 }
 
-/* ========================================== */
-/* HERO TROPICAL                              */
-/* ========================================== */
 .hero-tropical {
     background: linear-gradient(135deg, #1a4d2e 0%, #2a9d8f 50%, #e9c46a 100%);
     padding: 45px 40px;
@@ -172,9 +165,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     z-index: 1;
 }
 
-/* ========================================== */
-/* CARD TROPICAL                              */
-/* ========================================== */
 .tropical-card {
     background: #ffffff;
     padding: 28px;
@@ -190,7 +180,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     transform: translateY(-2px);
 }
 
-/* KPI CARDS - Tropical Heritage */
 .kpi-tropical {
     background: linear-gradient(135deg, #ffffff 0%, #f8f5f0 100%);
     padding: 22px;
@@ -246,7 +235,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     font-style: italic;
 }
 
-/* SECTION TITLE */
 .section-title {
     font-family: 'Playfair Display', serif;
     color: #1a4d2e;
@@ -258,7 +246,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     display: inline-block;
 }
 
-/* INSIGHT - Tropical Heritage */
 .insight-leaf {
     background: linear-gradient(135deg, #f4a261 0%, #e9c46a 100%);
     padding: 20px;
@@ -299,7 +286,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
 
 .rec-leaf b { color: #e9c46a; }
 
-/* TABS */
 .stTabs [data-baseweb="tab-list"] {
     background: #ffffff;
     border-radius: 12px;
@@ -319,7 +305,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     color: #e9c46a !important;
 }
 
-/* BUTTONS */
 .stButton > button {
     background: linear-gradient(135deg, #1a4d2e, #2a9d8f);
     color: #e9c46a;
@@ -335,7 +320,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     color: #1a4d2e;
 }
 
-/* DIVIDER */
 .tropical-divider {
     height: 3px;
     background: linear-gradient(90deg, transparent, #e9c46a, #2a9d8f, transparent);
@@ -343,7 +327,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     border-radius: 3px;
 }
 
-/* MAP INFO BOX */
 .map-info {
     background: linear-gradient(135deg, #f4a261, #e76f51);
     padding: 20px;
@@ -353,7 +336,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     box-shadow: 0 4px 15px rgba(231, 111, 81, 0.3);
 }
 
-/* FOOTER */
 .footer-tropical {
     background: linear-gradient(135deg, #1a4d2e, #2d7a4a);
     padding: 30px;
@@ -364,7 +346,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * {
     border-top: 4px solid #e9c46a;
 }
 
-/* Alert */
 .stAlert {
     border-radius: 12px !important;
     border-left: 4px solid #e9c46a !important;
@@ -441,37 +422,43 @@ COORDS = {
     'PAPUA TENGAH': (-3.50, 137.00), 'PAPUA PEGUNUNGAN': (-4.00, 138.50)
 }
 
-# Fungsi helper untuk peta
-def make_map(df_map, komoditas, warna='#1a4d2e'):
+# ==========================================
+# 4. FUNGSI PETA (FIXED - NO ERROR)
+# ==========================================
+def make_map(df_map, komoditas):
     df_map = df_map.copy()
-    df_map['lat'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0,0))[0])
-    df_map['lon'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0,0))[1])
-    df_map = df_map[df_map['lat'] != 0]
-    def make_map(df_map, komoditas):
-    df_map = df_map.copy()
-    df_map['lat'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0,0))[0])
-    df_map['lon'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0,0))[1])
+    df_map['lat'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0, 0))[0])
+    df_map['lon'] = df_map['Provinsi'].map(lambda x: COORDS.get(x, (0, 0))[1])
     df_map = df_map[df_map['lat'] != 0]
     
     fig = px.scatter_geo(
         df_map,
-        lat='lat', 
+        lat='lat',
         lon='lon',
         size=komoditas,
         color=komoditas,
         hover_name='Provinsi',
         hover_data=[komoditas],
-        color_continuous_scale=[(0, '#f8f5f0'), (0.3, '#e9c46a'), (0.6, '#f4a261'), (1, '#e76f51')],
+        color_continuous_scale=[
+            (0, '#f8f5f0'),
+            (0.3, '#e9c46a'),
+            (0.6, '#f4a261'),
+            (1, '#e76f51')
+        ],
         scope='asia',
         center=dict(lat=-2.5, lon=118),
         projection='natural earth'
     )
     
     fig.update_geos(
-        showcountries=True, countrycolor='#2a9d8f',
-        showcoastlines=True, coastlinecolor='#1a4d2e',
-        showland=True, landcolor='#f4e4bc',
-        showocean=True, oceancolor='#a8d5e2',
+        showcountries=True,
+        countrycolor='#2a9d8f',
+        showcoastlines=True,
+        coastlinecolor='#1a4d2e',
+        showland=True,
+        landcolor='#f4e4bc',
+        showocean=True,
+        oceancolor='#a8d5e2',
         showlakes=False
     )
     
@@ -487,7 +474,7 @@ def make_map(df_map, komoditas, warna='#1a4d2e'):
             bgcolor='white'
         ),
         title=dict(
-            text=f"🗺️ Peta Sebaran Produksi {komoditas.replace('_', ' ')} di Indonesia",
+            text=f"Peta Sebaran Produksi {komoditas.replace('_', ' ')} di Indonesia",
             font=dict(family='Playfair Display', size=22, color='#1a4d2e'),
             x=0.5
         )
@@ -495,7 +482,7 @@ def make_map(df_map, komoditas, warna='#1a4d2e'):
     return fig
 
 # ==========================================
-# 4. SIDEBAR
+# 5. SIDEBAR
 # ==========================================
 with st.sidebar:
     st.markdown("""
@@ -507,24 +494,24 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     menu = st.radio(
-        "**📍 NAVIGASI**",
+        "**NAVIGASI**",
         [
-            "🏠 Beranda & Peta",
-            "📊 A. Data Understanding",
-            "🧹 B. Data Cleaning",
-            "📈 C. EDA (6 Visualisasi)",
-            "🔗 D. Analisis Hubungan",
-            "📉 E. Regresi Linear",
-            "🌲 BONUS: Random Forest",
-            "🌳 BONUS: Decision Tree",
-            "⏳ BONUS: Forecasting",
-            "🎮 BONUS: Dashboard Interaktif",
-            "💡 F. Insight & Rekomendasi"
+            "Beranda & Peta",
+            "A. Data Understanding",
+            "B. Data Cleaning",
+            "C. EDA (6 Visualisasi)",
+            "D. Analisis Hubungan",
+            "E. Regresi Linear",
+            "BONUS: Random Forest",
+            "BONUS: Decision Tree",
+            "BONUS: Forecasting",
+            "BONUS: Komparator",
+            "F. Insight & Rekomendasi"
         ]
     )
     
     st.markdown("---")
-    st.markdown("**🎯 FILTER KOMODITAS**")
+    st.markdown("**FILTER KOMODITAS**")
     kom_filter = st.selectbox("Pilih Komoditas:", num_cols, index=0)
     
     st.markdown("---")
@@ -536,19 +523,16 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # ==========================================
-# 5. ROUTING HALAMAN
+# 6. HALAMAN BERANDA + PETA
 # ==========================================
-
-# === 🏠 BERANDA + PETA INDONESIA ===
-if menu == "🏠 Beranda & Peta":
+if menu == "Beranda & Peta":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">🌿 Tropical Heritage Dashboard</div>
+        <div class="hero-title">Tropical Heritage Dashboard</div>
         <div class="hero-subtitle">Menelusuri Jejak Perkebunan Nusantara dari Sabang sampai Merauke</div>
     </div>
     """, unsafe_allow_html=True)
     
-    # KPI Cards
     c1, c2, c3, c4 = st.columns(4)
     total_prod = df[num_cols].sum().sum()
     top_kom = df[num_cols].sum().idxmax().replace('_', ' ')
@@ -595,10 +579,9 @@ if menu == "🏠 Beranda & Peta":
     
     st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
     
-    # PETA INDONESIA INTERAKTIF
     st.markdown("""
     <div class="tropical-card">
-        <div class="section-title">🗺️ PETA PERKEBUNAN INDONESIA</div>
+        <div class="section-title">PETA PERKEBUNAN INDONESIA</div>
         <p style="color:#7a6f5f; margin-top:-5px;">Klik lingkaran untuk melihat detail produksi setiap provinsi</p>
     </div>
     """, unsafe_allow_html=True)
@@ -608,21 +591,20 @@ if menu == "🏠 Beranda & Peta":
     
     st.markdown(f"""
     <div class="map-info">
-        <b>🌿 Insight Peta:</b> Lingkaran besar menunjukkan provinsi sentra produksi {kom_filter.replace('_',' ')}.
-        Terlihat jelas konsentrasi produksi di wilayah Sumatera (untuk kelapa sawit & karet) 
+        <b>Insight Peta:</b> Lingkaran besar menunjukkan provinsi sentra produksi {kom_filter.replace('_',' ')}.
+        Terlihat jelas konsentrasi produksi di wilayah Sumatera (untuk kelapa sawit & karet)
         dan Jawa Timur (untuk tebu & kopi).
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
     
-    # Top Provinsi & Komposisi
     col1, col2 = st.columns([3, 2])
     
     with col1:
         st.markdown("""
         <div class="tropical-card">
-            <div class="section-title">📊 Top 10 Provinsi Sentra Produksi</div>
+            <div class="section-title">Top 10 Provinsi Sentra Produksi</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -633,9 +615,7 @@ if menu == "🏠 Beranda & Peta":
         fig = px.bar(
             top10, x='Total', y='Provinsi', orientation='h',
             color='Total',
-            color_continuous_scale=[
-                (0, '#f4a261'), (0.5, '#e76f51'), (1, '#1a4d2e')
-            ]
+            color_continuous_scale=[(0, '#f4a261'), (0.5, '#e76f51'), (1, '#1a4d2e')]
         )
         fig.update_layout(
             height=450,
@@ -650,7 +630,7 @@ if menu == "🏠 Beranda & Peta":
     with col2:
         st.markdown("""
         <div class="tropical-card">
-            <div class="section-title">🥧 Komposisi Komoditas</div>
+            <div class="section-title">Komposisi Komoditas</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -669,11 +649,13 @@ if menu == "🏠 Beranda & Peta":
         )
         st.plotly_chart(fig_pie, use_container_width=True)
 
-# === A. DATA UNDERSTANDING ===
-elif menu == "📊 A. Data Understanding":
+# ==========================================
+# 7. HALAMAN A. DATA UNDERSTANDING
+# ==========================================
+elif menu == "A. Data Understanding":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">📊 A. Data Understanding</div>
+        <div class="hero-title">A. Data Understanding</div>
         <div class="hero-subtitle">Mengenal Struktur Data Perkebunan Nusantara (Bobot 10%)</div>
     </div>
     """, unsafe_allow_html=True)
@@ -692,7 +674,7 @@ elif menu == "📊 A. Data Understanding":
         <div class="kpi-label">Numerik</div><div class="kpi-value">{len(num_cols)}</div>
         <div class="kpi-trend">Komoditas</div></div>""", unsafe_allow_html=True)
     
-    tab1, tab2, tab3, tab4 = st.tabs(["📋 Preview", "ℹ️ Info", "📈 Statistik", "📖 Deskripsi"])
+    tab1, tab2, tab3, tab4 = st.tabs(["Preview", "Info", "Statistik", "Deskripsi"])
     
     with tab1:
         st.markdown('<div class="tropical-card"><div class="section-title">Preview Data</div></div>', unsafe_allow_html=True)
@@ -700,7 +682,9 @@ elif menu == "📊 A. Data Understanding":
     
     with tab2:
         st.markdown('<div class="tropical-card"><div class="section-title">Info Data</div></div>', unsafe_allow_html=True)
-        buf = io.StringIO(); df.info(buf=buf); st.code(buf.getvalue())
+        buf = io.StringIO()
+        df.info(buf=buf)
+        st.code(buf.getvalue())
     
     with tab3:
         st.markdown('<div class="tropical-card"><div class="section-title">Statistik Deskriptif</div></div>', unsafe_allow_html=True)
@@ -710,13 +694,15 @@ elif menu == "📊 A. Data Understanding":
         st.markdown('<div class="tropical-card"><div class="section-title">Deskripsi Variabel</div></div>', unsafe_allow_html=True)
         for col in df.columns:
             desc = 'Nama provinsi (38 provinsi)' if col == 'Provinsi' else f'Produksi {col.replace("_"," ").lower()} dalam ton'
-            st.markdown(f'<div class="insight-leaf"><b>🔹 {col}:</b> {desc}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="insight-leaf"><b>{col}:</b> {desc}</div>', unsafe_allow_html=True)
 
-# === B. DATA CLEANING ===
-elif menu == "🧹 B. Data Cleaning":
+# ==========================================
+# 8. HALAMAN B. DATA CLEANING
+# ==========================================
+elif menu == "B. Data Cleaning":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">🧹 B. Data Cleaning</div>
+        <div class="hero-title">B. Data Cleaning</div>
         <div class="hero-subtitle">Proses Pembersihan Data Sebelum Analisis (Bobot 15%)</div>
     </div>
     """, unsafe_allow_html=True)
@@ -744,12 +730,16 @@ elif menu == "🧹 B. Data Cleaning":
         <div class="kpi-trend">Data Sentra</div></div>""", unsafe_allow_html=True)
     
     st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
-    st.markdown('<div class="tropical-card"><div class="section-title">📊 Boxplot Deteksi Outlier</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="tropical-card"><div class="section-title">Boxplot Deteksi Outlier</div></div>', unsafe_allow_html=True)
     
     fig, ax = plt.subplots(figsize=(14, 6))
     fig.patch.set_facecolor('#ffffff')
     ax.set_facecolor('#f8f5f0')
-    sns.boxplot(data=df[num_cols], palette=['#1a4d2e', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#7a6f5f', '#d4a373'], ax=ax)
+    sns.boxplot(
+        data=df[num_cols],
+        palette=['#1a4d2e', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#7a6f5f', '#d4a373'],
+        ax=ax
+    )
     ax.set_yscale('symlog')
     ax.set_title('Distribusi Produksi dengan Skala Symlog', color='#1a4d2e', fontsize=14, fontweight='bold')
     plt.xticks(rotation=45, color='#1a4d2e')
@@ -758,21 +748,23 @@ elif menu == "🧹 B. Data Cleaning":
     
     st.markdown("""
     <div class="insight-leaf">
-        <b>🌿 Keputusan:</b> Outlier TIDAK dihapus karena merupakan sentra produksi alami.
+        <b>Keputusan:</b> Outlier TIDAK dihapus karena merupakan sentra produksi alami.
         Provinsi seperti Riau (Sawit: 9.136 ton) dan Jawa Timur (Tebu: 1.252 ton) memang sentra utama.
     </div>
     """, unsafe_allow_html=True)
 
-# === C. EDA ===
-elif menu == "📈 C. EDA (6 Visualisasi)":
+# ==========================================
+# 9. HALAMAN C. EDA (6 VISUALISASI)
+# ==========================================
+elif menu == "C. EDA (6 Visualisasi)":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">📈 C. Exploratory Data Analysis</div>
+        <div class="hero-title">C. Exploratory Data Analysis</div>
         <div class="hero-subtitle">6 Visualisasi Matplotlib dengan Interpretasi (Bobot 20%)</div>
     </div>
     """, unsafe_allow_html=True)
     
-    tabs = st.tabs(["1️⃣ Histogram", "2️⃣ Scatter", "3️⃣ Line", "4️⃣ Bar", "5️⃣ Boxplot", "6️⃣ Heatmap"])
+    tabs = st.tabs(["Histogram", "Scatter", "Line", "Bar", "Boxplot", "Heatmap"])
     
     with tabs[0]:
         st.markdown('<div class="tropical-card"><div class="section-title">Histogram - Distribusi Produksi</div></div>', unsafe_allow_html=True)
@@ -784,27 +776,36 @@ elif menu == "📈 C. EDA (6 Visualisasi)":
         ax.set_title(f'Distribusi {kom_filter.replace("_"," ")}', color='#1a4d2e', fontsize=14, fontweight='bold')
         ax.set_xlabel('Produksi (Ton)', color='#1a4d2e')
         ax.set_ylabel('Frekuensi', color='#1a4d2e')
-        ax.legend(); ax.grid(alpha=0.2); plt.tight_layout()
+        ax.legend()
+        ax.grid(alpha=0.2)
+        plt.tight_layout()
         st.pyplot(fig)
-        st.markdown(f"""<div class="insight-leaf"><b>🌿 Interpretasi:</b> Skewness = {df[kom_filter].skew():.2f} (right-skewed).
+        st.markdown(f"""<div class="insight-leaf"><b>Interpretasi:</b> Skewness = {df[kom_filter].skew():.2f} (right-skewed).
         Mayoritas provinsi produksi rendah, hanya sentra utama yang tinggi.</div>""", unsafe_allow_html=True)
     
     with tabs[1]:
         st.markdown('<div class="tropical-card"><div class="section-title">Scatter Plot - Hubungan Komoditas</div></div>', unsafe_allow_html=True)
         c1, c2 = st.columns(2)
-        with c1: x = st.selectbox("X:", num_cols, key='sx')
-        with c2: y = st.selectbox("Y:", num_cols, index=1, key='sy')
+        with c1:
+            x = st.selectbox("X:", num_cols, key='sx')
+        with c2:
+            y = st.selectbox("Y:", num_cols, index=1, key='sy')
         
         fig, ax = plt.subplots(figsize=(12, 6))
-        fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
+        fig.patch.set_facecolor('#ffffff')
+        ax.set_facecolor('#f8f5f0')
         ax.scatter(df[x], df[y], c='#f4a261', s=150, edgecolors='#1a4d2e', linewidth=2, alpha=0.9)
-        z = np.polyfit(df[x], df[y], 1); p = np.poly1d(z)
+        z = np.polyfit(df[x], df[y], 1)
+        p = np.poly1d(z)
         ax.plot(sorted(df[x]), p(sorted(df[x])), color='#e76f51', linestyle='--', linewidth=3, label='Trend')
         corr_val = df[x].corr(df[y])
         ax.set_title(f'{x} vs {y} (r = {corr_val:.3f})', color='#1a4d2e', fontsize=14, fontweight='bold')
-        ax.legend(); ax.grid(alpha=0.2); plt.tight_layout()
+        ax.legend()
+        ax.grid(alpha=0.2)
+        plt.tight_layout()
         st.pyplot(fig)
-        st.markdown(f"""<div class="insight-leaf"><b>🌿 Interpretasi:</b> Korelasi = {corr_val:.3f} ({'kuat' if abs(corr_val)>0.5 else 'sedang' if abs(corr_val)>0.3 else 'lemah'})</div>""", unsafe_allow_html=True)
+        strength = 'kuat' if abs(corr_val) > 0.5 else 'sedang' if abs(corr_val) > 0.3 else 'lemah'
+        st.markdown(f"""<div class="insight-leaf"><b>Interpretasi:</b> Korelasi = {corr_val:.3f} ({strength})</div>""", unsafe_allow_html=True)
     
     with tabs[2]:
         st.markdown('<div class="tropical-card"><div class="section-title">Line Plot - Top Provinsi</div></div>', unsafe_allow_html=True)
@@ -812,79 +813,94 @@ elif menu == "📈 C. EDA (6 Visualisasi)":
         top = df.nlargest(n, kom_filter)
         
         fig, ax = plt.subplots(figsize=(14, 6))
-        fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
+        fig.patch.set_facecolor('#ffffff')
+        ax.set_facecolor('#f8f5f0')
         ax.plot(range(len(top)), top[kom_filter], marker='o', color='#e76f51', linewidth=3, markersize=12)
         ax.fill_between(range(len(top)), top[kom_filter], alpha=0.3, color='#f4a261')
         ax.set_xticks(range(len(top)))
         ax.set_xticklabels(top['Provinsi'], rotation=45, ha='right', color='#1a4d2e', fontweight='bold')
         ax.set_ylabel('Produksi (Ton)', color='#1a4d2e')
         ax.set_title(f'Top {n} - {kom_filter}', color='#1a4d2e', fontsize=14, fontweight='bold')
-        ax.grid(alpha=0.2); plt.tight_layout()
+        ax.grid(alpha=0.2)
+        plt.tight_layout()
         st.pyplot(fig)
-        st.markdown(f"""<div class="insight-leaf"><b>🌿 Interpretasi:</b> Produksi sangat terkonsentrasi. Provinsi #1 mendominasi.</div>""", unsafe_allow_html=True)
+        st.markdown("""<div class="insight-leaf"><b>Interpretasi:</b> Produksi sangat terkonsentrasi. Provinsi #1 mendominasi.</div>""", unsafe_allow_html=True)
     
     with tabs[3]:
         st.markdown('<div class="tropical-card"><div class="section-title">Bar Chart - Total Komoditas</div></div>', unsafe_allow_html=True)
         total = df[num_cols].sum().sort_values(ascending=True)
         
         fig, ax = plt.subplots(figsize=(12, 6))
-        fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
+        fig.patch.set_facecolor('#ffffff')
+        ax.set_facecolor('#f8f5f0')
         colors = ['#f8f5f0', '#e9c46a', '#f4a261', '#e76f51', '#2a9d8f', '#1a4d2e', '#7a6f5f']
         bars = ax.barh(total.index, total.values, color=colors[:len(total)], edgecolor='#1a4d2e', linewidth=2)
         ax.set_title('Total Produksi per Komoditas', color='#1a4d2e', fontsize=14, fontweight='bold')
         for bar, val in zip(bars, total.values):
             ax.text(bar.get_width() + max(total)*0.01, bar.get_y() + bar.get_height()/2,
                    f'{val:,.0f}', va='center', color='#1a4d2e', fontweight='bold')
-        ax.grid(alpha=0.2, axis='x'); plt.tight_layout()
+        ax.grid(alpha=0.2, axis='x')
+        plt.tight_layout()
         st.pyplot(fig)
-        st.markdown("""<div class="insight-leaf"><b>🌿 Interpretasi:</b> Kelapa Sawit mendominasi dengan selisih sangat jauh.</div>""", unsafe_allow_html=True)
+        st.markdown("""<div class="insight-leaf"><b>Interpretasi:</b> Kelapa Sawit mendominasi dengan selisih sangat jauh.</div>""", unsafe_allow_html=True)
     
     with tabs[4]:
         st.markdown('<div class="tropical-card"><div class="section-title">Boxplot - Sebaran per Komoditas</div></div>', unsafe_allow_html=True)
         fig, ax = plt.subplots(figsize=(12, 6))
-        fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
+        fig.patch.set_facecolor('#ffffff')
+        ax.set_facecolor('#f8f5f0')
         df_m = df.melt(id_vars=['Provinsi'], value_vars=num_cols)
-        sns.boxplot(data=df_m, x='variable', y='value', ax=ax,
-                   palette=['#1a4d2e', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#7a6f5f', '#d4a373'])
+        sns.boxplot(
+            data=df_m, x='variable', y='value', ax=ax,
+            palette=['#1a4d2e', '#2a9d8f', '#e9c46a', '#f4a261', '#e76f51', '#7a6f5f', '#d4a373']
+        )
         ax.set_title('Distribusi Produksi per Komoditas', color='#1a4d2e', fontsize=14, fontweight='bold')
         plt.xticks(rotation=45, color='#1a4d2e')
-        ax.set_yscale('symlog'); ax.grid(alpha=0.2, axis='y'); plt.tight_layout()
+        ax.set_yscale('symlog')
+        ax.grid(alpha=0.2, axis='y')
+        plt.tight_layout()
         st.pyplot(fig)
-        st.markdown("""<div class="insight-leaf"><b>🌿 Interpretasi:</b> Sawit variasi tertinggi, Teh & Kakao terendah.</div>""", unsafe_allow_html=True)
+        st.markdown("""<div class="insight-leaf"><b>Interpretasi:</b> Sawit variasi tertinggi, Teh & Kakao terendah.</div>""", unsafe_allow_html=True)
     
     with tabs[5]:
         st.markdown('<div class="tropical-card"><div class="section-title">Heatmap - Korelasi Komoditas</div></div>', unsafe_allow_html=True)
         fig, ax = plt.subplots(figsize=(12, 10))
-        fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
-        sns.heatmap(df[num_cols].corr(), annot=True, fmt='.2f', cmap='YlOrRd', ax=ax,
-                   linewidths=2, center=0)
+        fig.patch.set_facecolor('#ffffff')
+        ax.set_facecolor('#f8f5f0')
+        sns.heatmap(
+            df[num_cols].corr(), annot=True, fmt='.2f', cmap='YlOrRd', ax=ax,
+            linewidths=2, center=0
+        )
         ax.set_title('Heatmap Korelasi', color='#1a4d2e', fontsize=14, fontweight='bold')
         plt.xticks(color='#1a4d2e', fontweight='bold')
         plt.yticks(color='#1a4d2e', fontweight='bold')
         plt.tight_layout()
         st.pyplot(fig)
-        st.markdown("""<div class="insight-leaf"><b>🌿 Interpretasi:</b> Komoditas dengan iklim serupa cenderung berkorelasi positif.</div>""", unsafe_allow_html=True)
+        st.markdown("""<div class="insight-leaf"><b>Interpretasi:</b> Komoditas dengan iklim serupa cenderung berkorelasi positif.</div>""", unsafe_allow_html=True)
 
-# === D. ANALISIS HUBUNGAN ===
-elif menu == "🔗 D. Analisis Hubungan":
+# ==========================================
+# 10. HALAMAN D. ANALISIS HUBUNGAN
+# ==========================================
+elif menu == "D. Analisis Hubungan":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">🔗 D. Analisis Hubungan Variabel</div>
+        <div class="hero-title">D. Analisis Hubungan Variabel</div>
         <div class="hero-subtitle">Identifikasi Variabel Paling Berpengaruh (Bobot 15%)</div>
     </div>
     """, unsafe_allow_html=True)
     
     corr = df[num_cols].corr()
-    st.markdown('<div class="tropical-card"><div class="section-title">📊 Matriks Korelasi</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="tropical-card"><div class="section-title">Matriks Korelasi</div></div>', unsafe_allow_html=True)
     st.dataframe(corr.round(3), use_container_width=True)
     
     st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
     
     total_corr = corr.abs().sum().sort_values(ascending=False)
-    st.markdown('<div class="tropical-card"><div class="section-title">⭐ Variabel Paling Berpengaruh</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="tropical-card"><div class="section-title">Variabel Paling Berpengaruh</div></div>', unsafe_allow_html=True)
     
     fig, ax = plt.subplots(figsize=(12, 6))
-    fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
+    fig.patch.set_facecolor('#ffffff')
+    ax.set_facecolor('#f8f5f0')
     colors = ['#e76f51' if i == 0 else '#2a9d8f' for i in range(len(total_corr))]
     bars = ax.barh(total_corr.index, total_corr.values, color=colors, edgecolor='#1a4d2e', linewidth=2)
     ax.set_title('Total Absolut Korelasi', color='#1a4d2e', fontsize=14, fontweight='bold')
@@ -898,25 +914,32 @@ elif menu == "🔗 D. Analisis Hubungan":
     top_var = total_corr.index[0]
     st.markdown(f"""
     <div class="insight-leaf">
-        <b>🏆 Paling Berpengaruh: {top_var.replace("_"," ").upper()}</b><br>
+        <b>Paling Berpengaruh: {top_var.replace("_"," ").upper()}</b><br>
         Total korelasi absolut: <b>{total_corr.values[0]:.2f}</b><br>
         Variabel ini paling terhubung dengan komoditas lain - bisa jadi indikator utama sektor perkebunan.
     </div>
     """, unsafe_allow_html=True)
 
-# === E. REGRESI LINEAR ===
-elif menu == "📉 E. Regresi Linear":
+# ==========================================
+# 11. HALAMAN E. REGRESI LINEAR
+# ==========================================
+elif menu == "E. Regresi Linear":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">📉 E. Pemodelan Regresi Linear</div>
+        <div class="hero-title">E. Pemodelan Regresi Linear</div>
         <div class="hero-subtitle">Prediksi dengan Metrik MAE, RMSE, R² (Bobot 20%)</div>
     </div>
     """, unsafe_allow_html=True)
     
     c1, c2 = st.columns(2)
-    with c1: target = st.selectbox("🎯 Target (Y):", num_cols)
-    with c2: feats = st.multiselect("📊 Fitur (X):", [c for c in num_cols if c != target],
-                                   default=[c for c in num_cols if c != target][:3])
+    with c1:
+        target = st.selectbox("Target (Y):", num_cols)
+    with c2:
+        feats = st.multiselect(
+            "Fitur (X):",
+            [c for c in num_cols if c != target],
+            default=[c for c in num_cols if c != target][:3]
+        )
     
     if len(feats) > 0:
         X, y = df[feats], df[target]
@@ -946,40 +969,46 @@ elif menu == "📉 E. Regresi Linear":
             <div class="kpi-value">{r2:.4f}</div>
             <div class="kpi-trend">{r2*100:.1f}% Variasi</div></div>""", unsafe_allow_html=True)
         
-        # Persamaan
         eq = f"{target} = {model.intercept_:.2f}"
-        for f, c in zip(feats, model.coef_): eq += f" + {c:.2f} × {f}"
+        for f, c in zip(feats, model.coef_):
+            eq += f" + {c:.2f} × {f}"
         st.markdown(f"""
         <div class="tropical-card">
-            <div class="section-title">📐 Persamaan Regresi</div>
+            <div class="section-title">Persamaan Regresi</div>
             <code style="font-size:14px; padding:15px; background:#f8f5f0; display:block; border-radius:10px; color:#1a4d2e; font-weight:bold;">
             {eq}
             </code>
         </div>
         """, unsafe_allow_html=True)
         
-        # Scatter Aktual vs Prediksi
         fig, ax = plt.subplots(figsize=(10, 6))
-        fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
+        fig.patch.set_facecolor('#ffffff')
+        ax.set_facecolor('#f8f5f0')
         ax.scatter(y_te, pred, c='#f4a261', s=150, edgecolors='#1a4d2e', linewidth=2, alpha=0.9)
         mn, mx = min(y_te.min(), pred.min()), max(y_te.max(), pred.max())
         ax.plot([mn, mx], [mn, mx], color='#e76f51', linestyle='--', linewidth=3, label='Perfect')
         ax.set_xlabel('Aktual', color='#1a4d2e')
         ax.set_ylabel('Prediksi', color='#1a4d2e')
         ax.set_title('Aktual vs Prediksi', color='#1a4d2e', fontsize=14, fontweight='bold')
-        ax.legend(); ax.grid(alpha=0.2); plt.tight_layout()
+        ax.legend()
+        ax.grid(alpha=0.2)
+        plt.tight_layout()
         st.pyplot(fig)
+    else:
+        st.warning("Pilih minimal 1 variabel independen!")
 
-# === BONUS: RANDOM FOREST ===
-elif menu == "🌲 BONUS: Random Forest":
+# ==========================================
+# 12. BONUS: RANDOM FOREST
+# ==========================================
+elif menu == "BONUS: Random Forest":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">🌲 BONUS: Random Forest Regressor</div>
+        <div class="hero-title">BONUS: Random Forest Regressor</div>
         <div class="hero-subtitle">Ensemble Learning dengan 100 Pohon Keputusan (10 Poin Bonus)</div>
     </div>
     """, unsafe_allow_html=True)
     
-    target = st.selectbox("🎯 Target:", num_cols, key='rf')
+    target = st.selectbox("Target:", num_cols, key='rf')
     feats = [c for c in num_cols if c != target]
     
     X, y = df[feats], df[target]
@@ -1004,22 +1033,26 @@ elif menu == "🌲 BONUS: Random Forest":
     
     fi = pd.DataFrame({'Feature': feats, 'Importance': rf.feature_importances_}).sort_values('Importance')
     fig, ax = plt.subplots(figsize=(10, 6))
-    fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
+    fig.patch.set_facecolor('#ffffff')
+    ax.set_facecolor('#f8f5f0')
     ax.barh(fi['Feature'], fi['Importance'], color='#2a9d8f', edgecolor='#1a4d2e', linewidth=2)
     ax.set_title('Feature Importance', color='#1a4d2e', fontsize=14, fontweight='bold')
-    ax.grid(alpha=0.2, axis='x'); plt.tight_layout()
+    ax.grid(alpha=0.2, axis='x')
+    plt.tight_layout()
     st.pyplot(fig)
 
-# === BONUS: DECISION TREE ===
-elif menu == "🌳 BONUS: Decision Tree":
+# ==========================================
+# 13. BONUS: DECISION TREE
+# ==========================================
+elif menu == "BONUS: Decision Tree":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">🌳 BONUS: Decision Tree Regressor</div>
+        <div class="hero-title">BONUS: Decision Tree Regressor</div>
         <div class="hero-subtitle">Model Berbasis Aturan IF-ELSE (10 Poin Bonus)</div>
     </div>
     """, unsafe_allow_html=True)
     
-    target = st.selectbox("🎯 Target:", num_cols, key='dt')
+    target = st.selectbox("Target:", num_cols, key='dt')
     depth = st.slider("Max Depth:", 2, 10, 4)
     feats = [c for c in num_cols if c != target]
     
@@ -1034,96 +1067,124 @@ elif menu == "🌳 BONUS: Decision Tree":
     <div class="kpi-trend">{r2_dt*100:.1f}% Akurasi</div></div>""", unsafe_allow_html=True)
     
     fig, ax = plt.subplots(figsize=(20, 10))
-    fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
-    plot_tree(dt, feature_names=feats, filled=True, rounded=True, ax=ax, fontsize=8,
-             impurity=False, proportion=False)
+    fig.patch.set_facecolor('#ffffff')
+    ax.set_facecolor('#f8f5f0')
+    plot_tree(
+        dt, feature_names=feats, filled=True, rounded=True, ax=ax, fontsize=8,
+        impurity=False, proportion=False
+    )
     plt.title(f'Decision Tree (Depth: {depth})', color='#1a4d2e', fontsize=14, fontweight='bold')
     plt.tight_layout()
     st.pyplot(fig)
 
-# === BONUS: FORECASTING ===
-elif menu == "⏳ BONUS: Forecasting":
+# ==========================================
+# 14. BONUS: FORECASTING
+# ==========================================
+elif menu == "BONUS: Forecasting":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">⏳ BONUS: Forecasting 5 Tahun</div>
+        <div class="hero-title">BONUS: Forecasting 5 Tahun</div>
         <div class="hero-subtitle">Proyeksi dengan Growth Simulator (10 Poin Bonus)</div>
     </div>
     """, unsafe_allow_html=True)
     
     st.markdown("""
     <div class="insight-leaf">
-        <b>🌿 Scientific Note:</b> Dataset cross-sectional (bukan time-series),
+        <b>Scientific Note:</b> Dataset cross-sectional (bukan time-series),
         sehingga digunakan <b>Growth Projection Simulator</b> berbasis CAGR industri global.
     </div>
     """, unsafe_allow_html=True)
     
-    prov_fc = st.selectbox("🏙️ Provinsi:", df['Provinsi'].tolist())
-    gr = st.slider("📈 Growth Rate (%):", 1, 10, 5) / 100
+    prov_fc = st.selectbox("Provinsi:", df['Provinsi'].tolist())
+    gr = st.slider("Growth Rate (%):", 1, 10, 5) / 100
     
     years = np.arange(2024, 2029)
     fig, ax = plt.subplots(figsize=(12, 6))
-    fig.patch.set_facecolor('#ffffff'); ax.set_facecolor('#f8f5f0')
+    fig.patch.set_facecolor('#ffffff')
+    ax.set_facecolor('#f8f5f0')
     
     for kom in num_cols:
-        base = df[df['Provinsi']==prov_fc][kom].values[0]
-        vals = [base * ((1+gr)**i) for i in range(len(years))]
+        base = df[df['Provinsi'] == prov_fc][kom].values[0]
+        vals = [base * ((1 + gr) ** i) for i in range(len(years))]
         lw = 3 if kom == kom_filter else 1
         al = 1.0 if kom == kom_filter else 0.4
         col = '#e76f51' if kom == kom_filter else '#7a6f5f'
         ax.plot(years, vals, marker='o', label=kom, linewidth=lw, alpha=al, color=col)
     
     ax.set_title(f'Forecast - {prov_fc}', color='#1a4d2e', fontsize=14, fontweight='bold')
-    ax.set_xlabel('Tahun', color='#1a4d2e'); ax.set_ylabel('Produksi (Ton)', color='#1a4d2e')
+    ax.set_xlabel('Tahun', color='#1a4d2e')
+    ax.set_ylabel('Produksi (Ton)', color='#1a4d2e')
     ax.legend(loc='upper left', ncol=2, facecolor='#ffffff', edgecolor='#e9c46a')
-    ax.grid(alpha=0.2); plt.tight_layout()
+    ax.grid(alpha=0.2)
+    plt.tight_layout()
     st.pyplot(fig)
 
-# === BONUS: INTERACTIVE COMPARATOR ===
-elif menu == "🎮 BONUS: Dashboard Interaktif":
+# ==========================================
+# 15. BONUS: KOMPARATOR (INTERACTIVE DASHBOARD)
+# ==========================================
+elif menu == "BONUS: Komparator":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">🎮 BONUS: Province Comparator</div>
+        <div class="hero-title">BONUS: Province Comparator</div>
         <div class="hero-subtitle">Bandingkan 2 Provinsi dengan Radar Chart (10 Poin Bonus)</div>
     </div>
     """, unsafe_allow_html=True)
     
     c1, c2 = st.columns(2)
-    with c1: p1 = st.selectbox("Provinsi 1:", df['Provinsi'].tolist())
-    with c2: p2 = st.selectbox("Provinsi 2:", df['Provinsi'].tolist(), index=1)
+    with c1:
+        p1 = st.selectbox("Provinsi 1:", df['Provinsi'].tolist())
+    with c2:
+        p2 = st.selectbox("Provinsi 2:", df['Provinsi'].tolist(), index=1)
     
     fig = go.Figure()
-    v1 = df[df['Provinsi']==p1][num_cols].values.flatten().tolist()
-    v2 = df[df['Provinsi']==p2][num_cols].values.flatten().tolist()
+    v1 = df[df['Provinsi'] == p1][num_cols].values.flatten().tolist()
+    v2 = df[df['Provinsi'] == p2][num_cols].values.flatten().tolist()
     
-    fig.add_trace(go.Scatterpolar(r=v1+[v1[0]], theta=num_cols+[num_cols[0]],
-                                  fill='toself', name=p1,
-                                  line_color='#e76f51', fillcolor='rgba(231,111,81,0.3)'))
-    fig.add_trace(go.Scatterpolar(r=v2+[v2[0]], theta=num_cols+[num_cols[0]],
-                                  fill='toself', name=p2,
-                                  line_color='#2a9d8f', fillcolor='rgba(42,157,143,0.3)'))
+    fig.add_trace(go.Scatterpolar(
+        r=v1 + [v1[0]],
+        theta=num_cols + [num_cols[0]],
+        fill='toself',
+        name=p1,
+        line_color='#e76f51',
+        fillcolor='rgba(231,111,81,0.3)'
+    ))
+    fig.add_trace(go.Scatterpolar(
+        r=v2 + [v2[0]],
+        theta=num_cols + [num_cols[0]],
+        fill='toself',
+        name=p2,
+        line_color='#2a9d8f',
+        fillcolor='rgba(42,157,143,0.3)'
+    ))
     fig.update_layout(
-        polar=dict(radialaxis=dict(visible=True, gridcolor='#e9c46a'),
-                  angularaxis=dict(gridcolor='#e9c46a')),
-        height=550, plot_bgcolor='#ffffff', paper_bgcolor='#ffffff',
+        polar=dict(
+            radialaxis=dict(visible=True, gridcolor='#e9c46a'),
+            angularaxis=dict(gridcolor='#e9c46a')
+        ),
+        height=550,
+        plot_bgcolor='#ffffff',
+        paper_bgcolor='#ffffff',
         font=dict(family='Lato', color='#1a4d2e')
     )
     st.plotly_chart(fig, use_container_width=True)
     
-    t1 = df[df['Provinsi']==p1][num_cols].sum().sum()
-    t2 = df[df['Provinsi']==p2][num_cols].sum().sum()
+    t1 = df[df['Provinsi'] == p1][num_cols].sum().sum()
+    t2 = df[df['Provinsi'] == p2][num_cols].sum().sum()
     win = p1 if t1 > t2 else p2
-    st.markdown(f"""<div class="insight-leaf"><b>🏆 Pemenang: {win}</b> dengan {max(t1,t2):,.0f} ton.</div>""", unsafe_allow_html=True)
+    st.markdown(f"""<div class="insight-leaf"><b>Pemenang: {win}</b> dengan {max(t1,t2):,.0f} ton.</div>""", unsafe_allow_html=True)
 
-# === F. INSIGHT ===
-elif menu == "💡 F. Insight & Rekomendasi":
+# ==========================================
+# 16. HALAMAN F. INSIGHT & REKOMENDASI
+# ==========================================
+elif menu == "F. Insight & Rekomendasi":
     st.markdown("""
     <div class="hero-tropical">
-        <div class="hero-title">💡 F. Insight & Rekomendasi</div>
+        <div class="hero-title">F. Insight & Rekomendasi</div>
         <div class="hero-subtitle">Temuan & Rekomendasi Kebijakan (Bobot 20%)</div>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown('<div class="tropical-card"><div class="section-title">🔍 5 INSIGHT UTAMA</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="tropical-card"><div class="section-title">5 INSIGHT UTAMA</div></div>', unsafe_allow_html=True)
     insights = [
         ("Kelapa Sawit Mendominasi", f"Menyumbang {df['Kelapa_Sawit'].sum()/df[num_cols].sum().sum()*100:.1f}% total produksi. Risiko ketergantungan tinggi."),
         ("Ketimpangan Spasial Tinggi", "Top 5 provinsi menyumbang > 50% produksi nasional."),
@@ -1135,7 +1196,7 @@ elif menu == "💡 F. Insight & Rekomendasi":
         st.markdown(f'<div class="insight-leaf"><b>#{i} {t}:</b> {c}</div>', unsafe_allow_html=True)
     
     st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
-    st.markdown('<div class="tropical-card"><div class="section-title">💡 5 REKOMENDASI</div></div>', unsafe_allow_html=True)
+    st.markdown('<div class="tropical-card"><div class="section-title">5 REKOMENDASI</div></div>', unsafe_allow_html=True)
     recs = [
         ("Diversifikasi Geografis", "Kembangkan perkebunan di Indonesia Timur dengan insentif petani."),
         ("Hilirisasi Kelapa Sawit", "Bangun pabrik pengolahan CPO menjadi biodiesel di Riau & Kalteng."),
@@ -1147,7 +1208,7 @@ elif menu == "💡 F. Insight & Rekomendasi":
         st.markdown(f'<div class="rec-leaf"><b>#{i} {t}:</b> {c}</div>', unsafe_allow_html=True)
 
 # ==========================================
-# FOOTER
+# 17. FOOTER
 # ==========================================
 st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
 st.markdown("""
@@ -1155,7 +1216,7 @@ st.markdown("""
     <div style="font-size:35px;">🌿🌴🌺</div>
     <h3 style="color:#e9c46a; margin:10px 0; font-family:'Playfair Display', serif;">Tropical Heritage Dashboard</h3>
     <p style="margin:5px 0;">UAS Pengenalan Sains Data 2026</p>
-    <p style="margin:5px 0; font-size:13px;">Program Studi Sains Data • UIN K.H. Abdurrahman Wahid Pekalongan</p>
-    <p style="margin:10px 0 0 0; color:#f4a261; font-style:italic;">Menjaga Warisan Perkebunan Nusantara 🇮🇩</p>
+    <p style="margin:5px 0; font-size:13px;">Program Studi Sains Data - UIN K.H. Abdurrahman Wahid Pekalongan</p>
+    <p style="margin:10px 0 0 0; color:#f4a261; font-style:italic;">Menjaga Warisan Perkebunan Nusantara</p>
 </div>
 """, unsafe_allow_html=True)

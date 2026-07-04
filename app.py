@@ -1,8 +1,8 @@
 """
 =============================================================================
-🏆 TROPICAL HERITAGE DASHBOARD 
+🏆 TROPICAL HERITAGE DASHBOARD - FINAL COMPLETE EDITION
 UAS Pengenalan Sains Data - UIN K.H. Abdurrahman Wahid Pekalongan
-Fitur Lomba: Animasi, Export, Responsive, Insight Otomatis, Peta Premium
+Mencakup: Soal A-F + 4 Bonus + Peta Premium + Fix Warna Teks
 =============================================================================
 """
 import streamlit as st
@@ -24,7 +24,7 @@ from sklearn.tree import DecisionTreeRegressor, plot_tree
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 # ==========================================
-# 1. PAGE CONFIG & ANIMATED CSS
+# 1. PAGE CONFIG & COMPLETE CSS
 # ==========================================
 st.set_page_config(
     page_title="Tropical Heritage Dashboard",
@@ -37,7 +37,6 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap');
 
-/* --- GLOBAL & ANIMATIONS --- */
 * { font-family: 'Lato', sans-serif; }
 h1, h2, h3, .brand-title { font-family: 'Playfair Display', serif !important; }
 
@@ -55,12 +54,6 @@ h1, h2, h3, .brand-title { font-family: 'Playfair Display', serif !important; }
     to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-
-/* --- SIDEBAR PREMIUM --- */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #1a4d2e 0%, #2d7a4a 100%);
     border-right: 3px solid #e9c46a;
@@ -89,7 +82,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) {
 }
 div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * { color: #1a4d2e !important; }
 
-/* --- HERO SECTION --- */
 .hero-tropical {
     background: linear-gradient(135deg, #1a4d2e 0%, #2a9d8f 50%, #e9c46a 100%);
     padding: 45px 40px; border-radius: 20px; color: #f8f5f0; margin-bottom: 25px;
@@ -100,7 +92,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * { colo
 .hero-title { font-family: 'Playfair Display', serif !important; font-size: 40px; font-weight: 900; margin: 0; color: #f8f5f0 !important; position: relative; z-index: 1; }
 .hero-subtitle { color: #e9c46a !important; font-size: 17px; margin-top: 10px; font-style: italic; position: relative; z-index: 1; }
 
-/* --- CARDS & KPI --- */
 .tropical-card {
     background: #ffffff; padding: 28px; border-radius: 18px; border-top: 5px solid #2a9d8f;
     box-shadow: 0 5px 20px rgba(26, 77, 46, 0.08); margin-bottom: 20px;
@@ -129,7 +120,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * { colo
     margin-bottom: 15px; padding-bottom: 10px; border-bottom: 2px solid #e9c46a; display: inline-block;
 }
 
-/* --- INSIGHT & RECOMMENDATION BOXES --- */
 .insight-leaf {
     background: linear-gradient(135deg, #f4a261 0%, #e9c46a 100%); padding: 20px; border-radius: 12px;
     margin-bottom: 15px; position: relative; color: #1a4d2e; box-shadow: 0 4px 15px rgba(244, 162, 97, 0.3);
@@ -146,7 +136,6 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * { colo
 .rec-leaf::before { content: "🌴"; position: absolute; top: -10px; right: 15px; font-size: 30px; }
 .rec-leaf b { color: #e9c46a; }
 
-/* --- TABS & BUTTONS --- */
 .stTabs [data-baseweb="tab-list"] { background: #ffffff; border-radius: 12px; padding: 5px; border: 2px solid #e9c46a; }
 .stTabs [data-baseweb="tab"] { color: #7a6f5f !important; border-radius: 8px; padding: 10px 20px !important; font-weight: 700; }
 .stTabs [aria-selected="true"] { background: linear-gradient(135deg, #1a4d2e 0%, #2a9d8f 100%) !important; color: #e9c46a !important; }
@@ -161,6 +150,26 @@ div[role="radiogroup"] > label[data-baseweb="radio"]:has(input:checked) * { colo
 .map-info { background: linear-gradient(135deg, #f4a261, #e76f51); padding: 20px; border-radius: 12px; color: white; margin: 15px 0; box-shadow: 0 4px 15px rgba(231, 111, 81, 0.3); }
 .footer-tropical { background: linear-gradient(135deg, #1a4d2e, #2d7a4a); padding: 30px; border-radius: 20px; text-align: center; color: #f8f5f0; margin-top: 40px; border-top: 4px solid #e9c46a; }
 .stAlert { border-radius: 12px !important; border-left: 4px solid #e9c46a !important; }
+
+/* FIX: WARNA TEKS PENCARIAN & WIDGET AGAR TERBACA */
+[data-testid="stWidgetLabel"] { color: #1a4d2e !important; font-weight: 700 !important; }
+[data-testid="stSelectbox"] div[data-baseweb="select"] > div,
+[data-testid="stMultiSelect"] div[data-baseweb="select"] > div,
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input {
+    color: #1a4d2e !important; background-color: #ffffff !important;
+    border: 2px solid #e9c46a !important; border-radius: 10px !important;
+}
+[data-testid="stSelectbox"] input::placeholder,
+[data-testid="stMultiSelect"] input::placeholder,
+[data-testid="stTextInput"] input::placeholder { color: #7a6f5f !important; opacity: 1 !important; }
+div[data-baseweb="popover"] li { color: #1a4d2e !important; background-color: #ffffff !important; }
+div[data-baseweb="popover"] li:hover,
+div[data-baseweb="popover"] li[aria-selected="true"] { background-color: #e9c46a !important; color: #1a4d2e !important; }
+[data-testid="stMultiSelect"] span[data-baseweb="tag"] { background-color: #2a9d8f !important; color: #ffffff !important; border-radius: 8px !important; }
+[data-testid="stSlider"] label,
+[data-testid="stSlider"] div[data-testid="stTickBar"] { color: #1a4d2e !important; }
+[data-testid="stCaptionContainer"] { color: #7a6f5f !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -236,7 +245,6 @@ def make_premium_map(df_map, komoditas):
     df_map['Rank'] = df_map[komoditas].rank(ascending=False).astype(int)
     total_nasional = df_map[komoditas].sum()
     df_map['Kontribusi %'] = ((df_map[komoditas] / total_nasional) * 100).round(1)
-    
     df_map['hover_text'] = df_map.apply(
         lambda row: (
             f"<b style='font-size:14px;'>🏝️ {row['Provinsi']}</b><br>"
@@ -246,7 +254,6 @@ def make_premium_map(df_map, komoditas):
             f"📊 Kontribusi: <b>{row['Kontribusi %']}%</b> dari total nasional"
         ), axis=1
     )
-    
     fig = px.scatter_geo(
         df_map, lat='lat', lon='lon', size=komoditas, color=komoditas,
         hover_name=None, hover_data=None, custom_data=['hover_text'],
@@ -262,7 +269,6 @@ def make_premium_map(df_map, komoditas):
     )
     return fig
 
-# Helper untuk Download Button
 def get_table_download_link(df_data, filename="data_perkebunan.csv"):
     csv = df_data.to_csv(index=False)
     b64 = base64.b64encode(csv.encode()).decode()
@@ -307,33 +313,22 @@ with st.sidebar:
 # ==========================================
 
 if menu == "Beranda & Peta":
-    st.markdown("""
-    <div class="hero-tropical">
-        <div class="hero-title">Tropical Heritage Dashboard</div>
-        <div class="hero-subtitle">Menelusuri Jejak Perkebunan Nusantara dari Sabang sampai Merauke</div>
-    </div>
-    """, unsafe_allow_html=True)
-    
+    st.markdown('<div class="hero-tropical"><div class="hero-title">Tropical Heritage Dashboard</div><div class="hero-subtitle">Menelusuri Jejak Perkebunan Nusantara dari Sabang sampai Merauke</div></div>', unsafe_allow_html=True)
     c1, c2, c3, c4 = st.columns(4)
     total_prod = df[num_cols].sum().sum()
     top_kom = df[num_cols].sum().idxmax().replace('_', ' ')
-    
     with c1: st.markdown(f'<div class="kpi-tropical"><div class="kpi-icon">🗺️</div><div class="kpi-label">Provinsi Terdata</div><div class="kpi-value">{df.shape[0]}</div><div class="kpi-trend">Nusantara</div></div>', unsafe_allow_html=True)
     with c2: st.markdown(f'<div class="kpi-tropical"><div class="kpi-icon">🌱</div><div class="kpi-label">Jenis Komoditas</div><div class="kpi-value">{len(num_cols)}</div><div class="kpi-trend">Tanaman Tropis</div></div>', unsafe_allow_html=True)
     with c3: st.markdown(f'<div class="kpi-tropical"><div class="kpi-icon">📊</div><div class="kpi-label">Total Produksi</div><div class="kpi-value">{total_prod/1000:.1f}K</div><div class="kpi-trend">Ton Nasional</div></div>', unsafe_allow_html=True)
     with c4: st.markdown(f'<div class="kpi-tropical"><div class="kpi-icon">🏆</div><div class="kpi-label">Primadona</div><div class="kpi-value" style="font-size:20px;">{top_kom}</div><div class="kpi-trend">Produksi Tertinggi</div></div>', unsafe_allow_html=True)
-    
     st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
-    
     st.markdown('<div class="tropical-card"><div class="section-title">PETA PERKEBUNAN INDONESIA</div><p style="color:#7a6f5f; margin-top:-5px;">🖱️ <b>Hover</b> untuk detail | 🔍 <b>Scroll</b> untuk zoom | ✋ <b>Drag</b> untuk geser</p></div>', unsafe_allow_html=True)
     fig_map = make_premium_map(df, kom_filter)
     st.plotly_chart(fig_map, use_container_width=True)
-    
     top_prov = df.loc[df[kom_filter].idxmax(), 'Provinsi']
     top_val = df[kom_filter].max()
     top_pct = (top_val / df[kom_filter].sum()) * 100
     st.markdown(f'<div class="map-info"><b>🌿 Insight Peta {kom_filter.replace("_"," ")}:</b><br>• Sentra utama: <b>{top_prov}</b> dengan {top_val:,.1f} ton ({top_pct:.1f}% nasional)<br>• Ukuran lingkaran merepresentasikan volume produksi<br>• Warna lebih gelap = produksi lebih tinggi</div>', unsafe_allow_html=True)
-    
     st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
     col1, col2 = st.columns([3, 2])
     with col1:
@@ -564,67 +559,11 @@ elif menu == "F. Insight & Rekomendasi":
 # ==========================================
 st.markdown('<div class="tropical-divider"></div>', unsafe_allow_html=True)
 st.markdown("""
-st.markdown("""
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap');
-
-/* ... semua CSS yang sudah ada sebelumnya (Global, Sidebar, Hero, Cards, dll) ... */
-
-.stAlert { border-radius: 12px !important; border-left: 4px solid #e9c46a !important; }
-
-/* ========================================== */
-/* ✅ TEMPELKAN KODE PERBAIKAN DI SINI        */
-/* (Tepat sebelum penutup tag </style>)       */
-/* ========================================== */
-
-/* Fix: Warna Teks Pencarian & Widget Agar Terbaca */
-[data-testid="stWidgetLabel"] {
-    color: #1a4d2e !important;
-    font-weight: 700 !important;
-}
-
-[data-testid="stSelectbox"] div[data-baseweb="select"] > div,
-[data-testid="stMultiSelect"] div[data-baseweb="select"] > div,
-[data-testid="stTextInput"] input,
-[data-testid="stNumberInput"] input {
-    color: #1a4d2e !important;
-    background-color: #ffffff !important;
-    border: 2px solid #e9c46a !important;
-    border-radius: 10px !important;
-}
-
-[data-testid="stSelectbox"] input::placeholder,
-[data-testid="stMultiSelect"] input::placeholder,
-[data-testid="stTextInput"] input::placeholder {
-    color: #7a6f5f !important;
-    opacity: 1 !important;
-}
-
-div[data-baseweb="popover"] li {
-    color: #1a4d2e !important;
-    background-color: #ffffff !important;
-}
-
-div[data-baseweb="popover"] li:hover,
-div[data-baseweb="popover"] li[aria-selected="true"] {
-    background-color: #e9c46a !important;
-    color: #1a4d2e !important;
-}
-
-[data-testid="stMultiSelect"] span[data-baseweb="tag"] {
-    background-color: #2a9d8f !important;
-    color: #ffffff !important;
-    border-radius: 8px !important;
-}
-
-[data-testid="stSlider"] label,
-[data-testid="stSlider"] div[data-testid="stTickBar"] {
-    color: #1a4d2e !important;
-}
-
-[data-testid="stCaptionContainer"] {
-    color: #7a6f5f !important;
-}
-
-</style>
+<div class="footer-tropical">
+    <div style="font-size:35px;">🌿🌴🌺</div>
+    <h3 style="color:#e9c46a; margin:10px 0; font-family:'Playfair Display', serif;">Tropical Heritage Dashboard</h3>
+    <p style="margin:5px 0;">UAS Pengenalan Sains Data 2026</p>
+    <p style="margin:5px 0; font-size:13px;">Program Studi Sains Data - UIN K.H. Abdurrahman Wahid Pekalongan</p>
+    <p style="margin:10px 0 0 0; color:#f4a261; font-style:italic;">Menjaga Warisan Perkebunan Nusantara</p>
+</div>
 """, unsafe_allow_html=True)

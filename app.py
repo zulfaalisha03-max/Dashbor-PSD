@@ -15,11 +15,10 @@ st.set_page_config(
 )
 
 # ============================================
-# CUSTOM CSS (TANPA @IMPORT - AMAN)
+# CUSTOM CSS
 # ============================================
 st.markdown("""
 <style>
-/* Global Styling */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 .main .block-container {
@@ -27,7 +26,6 @@ st.markdown("""
     max-width: 1400px !important;
 }
 
-/* Hero Header */
 .hero-header {
     background: linear-gradient(135deg, #0A0E17 0%, #1a2332 50%, #0d1b2a 100%);
     padding: 3rem 2rem;
@@ -57,7 +55,6 @@ st.markdown("""
     letter-spacing: 0.5px;
 }
 
-/* Metric Cards */
 .metric-card {
     background: linear-gradient(145deg, rgba(18, 24, 38, 0.9), rgba(26, 35, 50, 0.8));
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -104,7 +101,6 @@ st.markdown("""
     font-weight: 500 !important;
 }
 
-/* Section Headers */
 .section-header {
     margin: 3rem 0 2rem 0;
     padding-bottom: 1rem;
@@ -132,7 +128,6 @@ st.markdown("""
     color: #6B7280 !important;
 }
 
-/* Chart Container */
 .chart-container {
     background: linear-gradient(145deg, rgba(18, 24, 38, 0.95), rgba(26, 35, 50, 0.9));
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -151,7 +146,6 @@ st.markdown("""
     border-left: 4px solid #4CAF50;
 }
 
-/* Map Container */
 .map-container {
     background: linear-gradient(145deg, rgba(18, 24, 38, 0.95), rgba(26, 35, 50, 0.9));
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -161,7 +155,6 @@ st.markdown("""
     box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
 }
 
-/* Insight Box */
 .insight-box {
     background: linear-gradient(135deg, rgba(27, 94, 32, 0.1), rgba(76, 175, 80, 0.05));
     border: 1px solid rgba(76, 175, 80, 0.3);
@@ -178,7 +171,6 @@ st.markdown("""
     font-size: 1.1rem !important;
 }
 
-/* Sidebar */
 section[data-testid="stSidebar"] {
     background: linear-gradient(180deg, #0D1117 0%, #161B22 100%) !important;
 }
@@ -206,7 +198,6 @@ section[data-testid="stSidebar"] {
     text-transform: uppercase;
 }
 
-/* Footer */
 .footer {
     text-align: center;
     padding: 3rem 2rem;
@@ -225,7 +216,6 @@ section[data-testid="stSidebar"] {
     margin-bottom: 0.5rem !important;
 }
 
-/* Divider */
 .premium-divider {
     height: 2px;
     background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.3), transparent);
@@ -233,7 +223,6 @@ section[data-testid="stSidebar"] {
     border: none;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .main .block-container { padding: 1rem !important; }
     .hero-title { font-size: 2rem !important; }
@@ -288,7 +277,6 @@ with st.sidebar:
         "💡 F. Insight & Rekomendasi"
     ]
     
-    # TANPA label_visibility (kompatibel semua versi)
     selected_page = st.radio("Pilih Halaman", options=menu_options)
     
     st.markdown("---")
@@ -315,7 +303,6 @@ if selected_page == "🏠 Beranda & Peta":
     </div>
     """, unsafe_allow_html=True)
     
-    # Metric Cards
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
@@ -360,7 +347,6 @@ if selected_page == "🏠 Beranda & Peta":
     
     st.markdown('<hr class="premium-divider">', unsafe_allow_html=True)
     
-    # MAP SECTION - MENGGUNAKAN scatter_geo (TANPA MAPBOX TOKEN)
     st.markdown("""
     <div class="section-header">
         <h2 class="section-title">🗺️ PETA PERKEBUNAN INDONESIA</h2>
@@ -370,7 +356,7 @@ if selected_page == "🏠 Beranda & Peta":
     
     st.markdown('<div class="map-container">', unsafe_allow_html=True)
     
-    # ✅ PAKAI scatter_geo - TIDAK BUTUH TOKEN MAPBOX
+    # ✅ FIXED: projection (bukan projection_type)
     fig_map = px.scatter_geo(
         map_data,
         lat='lat',
@@ -382,7 +368,7 @@ if selected_page == "🏠 Beranda & Peta":
         color_continuous_scale='Viridis',
         scope='asia',
         center={"lat": -2.5, "lon": 118.0},
-        projection_type="mercator",
+        projection="mercator",
         size_max=40,
         opacity=0.8
     )
@@ -412,7 +398,6 @@ if selected_page == "🏠 Beranda & Peta":
     st.plotly_chart(fig_map, use_container_width=True)
     st.markdown('</div>', unsafe_allow_html=True)
     
-    # Insight
     st.markdown("""
     <div class="insight-box">
         <div class="insight-title">💡 Insight Peta</div>
@@ -422,7 +407,6 @@ if selected_page == "🏠 Beranda & Peta":
     
     st.markdown('<hr class="premium-divider">', unsafe_allow_html=True)
     
-    # Top 10 Provinces
     st.markdown(f"""
     <div class="section-header">
         <h2 class="section-title">🏆 Top 10 Provinsi Sentra Produksi</h2>
@@ -531,7 +515,7 @@ elif selected_page == "🧹 B. Data Cleaning":
     """, unsafe_allow_html=True)
 
 # ============================================
-# PAGE: EDA (TANPA st.tabs - AMAN)
+# PAGE: EDA
 # ============================================
 elif selected_page == "📈 C. EDA (6 Visualisasi)":
     st.markdown("""
@@ -541,7 +525,6 @@ elif selected_page == "📈 C. EDA (6 Visualisasi)":
     </div>
     """, unsafe_allow_html=True)
     
-    # Gunakan selectbox sebagai pengganti tabs (lebih aman)
     viz_option = st.selectbox(
         "Pilih Visualisasi",
         ["1. Distribusi Produksi", "2. Tren Tahunan", "3. Box Plot", 

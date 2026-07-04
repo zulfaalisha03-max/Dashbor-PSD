@@ -356,7 +356,7 @@ if selected_page == "🏠 Beranda & Peta":
     
     st.markdown('<div class="map-container">', unsafe_allow_html=True)
     
-    # ✅ FIXED: projection (bukan projection_type)
+    # ✅ MAP DENGAN scatter_geo - TANPA projection_type, TANPA landpattern
     fig_map = px.scatter_geo(
         map_data,
         lat='lat',
@@ -384,8 +384,6 @@ if selected_page == "🏠 Beranda & Peta":
             oceancolor="rgb(10, 14, 23)",
             showlakes=True,
             lakecolor="rgb(15, 20, 30)",
-            showsubunits=True,
-            subunitcolor="rgb(50, 60, 70)",
             showframe=False,
             showcoastlines=True,
             coastlinecolor="rgb(70, 80, 90)",
@@ -395,7 +393,7 @@ if selected_page == "🏠 Beranda & Peta":
         font=dict(color='#E8EAF0')
     )
     
-    st.plotly_chart(fig_map, use_container_width=True)
+    st.plotly_chart(fig_map, width="stretch")
     st.markdown('</div>', unsafe_allow_html=True)
     
     st.markdown("""
@@ -443,7 +441,7 @@ if selected_page == "🏠 Beranda & Peta":
             margin=dict(l=0, r=0, t=0, b=0)
         )
         
-        st.plotly_chart(fig_bar, use_container_width=True)
+        st.plotly_chart(fig_bar, width="stretch")
     
     with col2:
         st.markdown("#### Komposisi Komoditas")
@@ -468,7 +466,7 @@ if selected_page == "🏠 Beranda & Peta":
             showlegend=True
         )
         
-        st.plotly_chart(fig_pie, use_container_width=True)
+        st.plotly_chart(fig_pie, width="stretch")
 
 # ============================================
 # PAGE: DATA UNDERSTANDING

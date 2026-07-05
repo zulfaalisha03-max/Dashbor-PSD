@@ -170,6 +170,73 @@ div[data-baseweb="popover"] li[aria-selected="true"] { background-color: #e9c46a
 [data-testid="stSlider"] label,
 [data-testid="stSlider"] div[data-testid="stTickBar"] { color: #1a4d2e !important; }
 [data-testid="stCaptionContainer"] { color: #7a6f5f !important; }
+/* === FIX FINAL: SELECTBOX & WIDGET DI SIDEBAR === */
+
+/* 1. Label Widget di Sidebar */
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] {
+    color: #e9c46a !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+}
+
+/* 2. Kotak Selectbox/Multiselect di Sidebar - Background Gelap + Teks Terang */
+[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid #e9c46a !important;
+    border-radius: 10px !important;
+    color: #ffffff !important;
+}
+
+/* 3. Teks Nilai yang Dipilih di Selectbox Sidebar */
+[data-testid="stSidebar"] div[data-baseweb="select"] span {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+/* 4. Placeholder Text di Sidebar */
+[data-testid="stSidebar"] input::placeholder {
+    color: rgba(255, 255, 255, 0.6) !important;
+    opacity: 1 !important;
+}
+
+/* 5. Dropdown Options (Popover) - Tetap Gelap agar Terbaca */
+div[data-baseweb="popover"] li {
+    color: #1a4d2e !important;
+    background-color: #ffffff !important;
+}
+
+div[data-baseweb="popover"] li:hover,
+div[data-baseweb="popover"] li[aria-selected="true"] {
+    background-color: #e9c46a !important;
+    color: #1a4d2e !important;
+    font-weight: 700 !important;
+}
+
+/* 6. Slider di Sidebar */
+[data-testid="stSidebar"] [data-testid="stSlider"] label {
+    color: #e9c46a !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stTickBar"] {
+    color: #f8f5f0 !important;
+}
+
+/* 7. Caption/Helper Text di Sidebar */
+[data-testid="stSidebar"] [data-testid="stCaptionContainer"] {
+    color: rgba(248, 245, 240, 0.7) !important;
+}
+
+/* 8. Multiselect Tags di Sidebar */
+[data-testid="stSidebar"] span[data-baseweb="tag"] {
+    background-color: #e9c46a !important;
+    color: #1a4d2e !important;
+    border-radius: 8px !important;
+}
+
+/* 9. Icon Panah Selectbox di Sidebar */
+[data-testid="stSidebar"] div[data-baseweb="select"] svg {
+    fill: #e9c46a !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
